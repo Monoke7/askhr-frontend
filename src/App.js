@@ -3,9 +3,10 @@ import readXlsxFile from 'read-excel-file'
 import logo from "./logo192.png"
 
 import './App.css';
+var file;
 
 function App() {
-  var file;
+  
   const [data, setData] = useState(null);
   const [type, settype] = useState(null);
   const [loader, setloader] = useState(null);
@@ -13,6 +14,7 @@ function App() {
 
   function getxlxs(e) {
     file = e.target.files; // FileList object
+    //console.log(file);
     settype("");
   }
 
@@ -71,7 +73,7 @@ function App() {
             if (arAskhrData.length > 0) {
               arAskhrData.forEach((val) => {
                 val.forEach((value) => {
-                  saveData(value, totalItem);
+                 saveData(value, totalItem);
                 });
               });
             }
@@ -173,7 +175,7 @@ function App() {
                       </div>
                       <div className="askhrCSV-error text-danger" />
                     </div>
-                    <button onClick={()=>(file)?createArrayTicketId(file):console.log("no File selected")} className=" btn btn-primary float-end border rounded btngetaskhr" id="btngetaskhr">
+                    <button onClick={()=>(file)?createArrayTicketId(file):console.log("no File selected"+file)} className=" btn btn-primary float-end border rounded btngetaskhr" id="btngetaskhr">
                       Run Process
                     </button>
                   </div>
