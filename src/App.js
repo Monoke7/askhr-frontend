@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import readXlsxFile from 'read-excel-file'
+import logo from "./logo192.png"
 
 import './App.css';
 
@@ -148,8 +149,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="continer-fluid text-center mt-5">
+        <div className="continer-fluid text-center mb-5 w-50">
           <div className="col-xs-12 col-md-12">
+          <img src={logo} className="App-logo" alt="logo" width="" height="" />
             <h1 className="site-title">AskHr App</h1>            
             <div id="Loader">
               {(loader === "load")?<div class="spinner-border text-primary spinner-border-sm" role="status"></div>:""}
@@ -157,14 +159,14 @@ function App() {
             </div>
             <div id="feedback-msg" className="mx-auto w-50" />
           </div>
-          <div className="row text-center">
-            <div className="mx-auto w-50 card pb-5 mt-5 bg-dark shadow shadow-lg">
+          <div className="row text-center mb-5">
+            <div className="mx-auto w-100 card pb-5 mt-5 bg-dark shadow shadow-lg">
               <div className="col-12 text-center">
                 
                 <center>
-                  <div className="form-group col-8">
+                  <div className="form-group col-8 mt-5">
                    
-                    <div className="mb-3 mt-5 w-auto">
+                    <div className="mb-3 mt-2 w-auto">
                       <div className="input-group ">
                         <label className="label mx-2 form-label" style={{ fontWeight: 'bold', color: 'azure' }}>Upload CSV:</label>
                         <input type="file" accept='.xlsx, .xls' name="askhrCSV" onChange={getxlxs} className="form-control border rounded" id="askhrCSV" />
@@ -179,14 +181,14 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="footer">
-            <p>
-              Copyright ©
-              All rights reserved | This template is made <i className="icon-heart" aria-hidden="true" /> by <a href="https://illation.co.za" rel="noreferrer" style={{ color: '#718199' }} target="_blank">illation.co.za</a>
-            </p>
-          </div>
+          
         </div>
-
+        <div className="footer mt-5" style={{ marginTop: "200px", fontSize: 18 }}>
+          <p>
+            Copyright ©
+            All rights reserved | This template is made <i className="icon-heart" aria-hidden="true" /> by <a href="https://illation.co.za" rel="noreferrer" style={{ color: '#718199' }} target="_blank">illation</a>
+          </p>
+        </div>
       </header>
     </div>
   );
