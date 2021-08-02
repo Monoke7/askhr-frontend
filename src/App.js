@@ -241,7 +241,7 @@ function App() {
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-               To Import Files (.csv) format, please follow the steps.
+               To Import excel Files (.xlsx) format, please follow the steps.
               </button>
             </h5>
           </div>
