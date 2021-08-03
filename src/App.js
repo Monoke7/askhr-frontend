@@ -107,40 +107,47 @@ function App() {
   function saveData(data, totalItem) {
 
     if (data) {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      var url = "https://ra0353ccb7.execute-api.us-east-1.amazonaws.com/dev/askhr/add/employee";
 
-        var raw = JSON.stringify(data);
+      var raw = JSON.stringify(data);
 
-        var settings = {
-            "url": "https://ra0353ccb7.execute-api.us-east-1.amazonaws.com/dev/askhr/add/employee",
-            "method": "POST",
-            "timeout": 0,
-            "headers": {
-                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjpbeyJpZCI6MSwidXNlcm5hbWUiOiJhc2tociIsImVtYWlsIjoiYXNraHJAZ21haWwuY29tIn1dLCJpYXQiOjE2MjY4NTk3MTd9.kRj3w9_DUR7D8nsLhsDRWXyUi1FW74JFdDwcAHrqpcQ",
-                "Content-Type": "application/json"
-            },
-            "data": raw
-        };
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      
 
-        $.ajax(settings).done(function(response) {
-            console.log(response);
+      fetch(url, requestOptions)
+        .then(response => response.text())
+        .then(result => {
 
-            cntRun++;
+          cntRun++;
 
-            if (totalItem === cntRun) {
-                setData("The number of records created successfully is " + cntRun);
-                settype("success");
-                setloader("");
-            }
+          if (totalItem === cntRun) {
+            setData("The number of records created successfully is " + cntRun);
+            settype("success");
+            setloader("");
+          }
+
+        })
+        .catch(error => {
+          console.log('error', error);
+          setData("Something went wrong while inserting the data.");
+          settype("error");
+          setloader("");
         });
 
-
     } else {
-        setData("We could not find records in the given file.");
-        settype("error");
-        setloader("");
+      setData("We could not find records in the given file.");
+      settype("error");
+      setloader("");
     }
 
-}
+  }
 
 
   return (
