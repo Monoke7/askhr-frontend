@@ -108,6 +108,8 @@ function App() {
 
     if (data) {
       var myHeaders = new Headers();
+      myHeaders.append("Access-Control-Allow-Origin", "*");
+      myHeaders.append("Access-Control-Allow-Methods", "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT");
       myHeaders.append("Content-Type", "application/json");
       var url = "https://ra0353ccb7.execute-api.us-east-1.amazonaws.com/dev/askhr/add/employee";
 
