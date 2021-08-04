@@ -44,12 +44,12 @@ function App() {
             var totalItem = 0;
             for (var u = 1; u < xlxsData.length; u++) {
 
-              name = xlxsData[u][0] + " " + xlxsData[u][1];
-              nickname = xlxsData[u][2];
-              Facility = xlxsData[u][3];
-              EmployeeNo = xlxsData[u][4];
-              phone = xlxsData[u][5];
-              Consent = xlxsData[u][6];
+              name = (xlxsData[u][0] + " " + xlxsData[u][1]).toString();
+              nickname = xlxsData[u][2].toString();
+              Facility = xlxsData[u][3].toString();
+              EmployeeNo = xlxsData[u][4].toString();
+              phone = xlxsData[u][5].toString();
+              Consent = xlxsData[u][6].toString();
 
               var askhr_fields = ({
                 "name": name,
@@ -108,20 +108,20 @@ function App() {
 
     if (data) {
       var myHeaders = new Headers();
-      myHeaders.append("Access-Control-Allow-Origin", "*");
-      myHeaders.append("Access-Control-Allow-Methods", "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT");
+      
       myHeaders.append("Content-Type", "application/json");
+       myHeaders.append("Access-Control-Allow-Origin", "*");
       var url = "https://ra0353ccb7.execute-api.us-east-1.amazonaws.com/dev/askhr/add/employee";
+        
 
       var raw = JSON.stringify(data);
 
-      var requestOptions = {
+     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: raw,
+        body: raw, 
         redirect: 'follow'
-      };
-      
+      };    
 
       fetch(url, requestOptions)
         .then(response => response.text())
@@ -142,7 +142,6 @@ function App() {
           settype("error");
           setloader("");
         });
-
     } else {
       setData("We could not find records in the given file.");
       settype("error");
