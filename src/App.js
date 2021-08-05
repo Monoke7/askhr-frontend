@@ -44,12 +44,12 @@ function App() {
             var totalItem = 0;
             for (var u = 1; u < xlxsData.length; u++) {
 
-              name = (xlxsData[u][0] + " " + xlxsData[u][1]).toString();
-              nickname = xlxsData[u][2].toString();
-              Facility = xlxsData[u][3].toString();
-              EmployeeNo = xlxsData[u][4].toString();
-              phone = xlxsData[u][5].toString();
-              Consent = xlxsData[u][6].toString();
+              name = (xlxsData[u][0] + " " + xlxsData[u][1]);
+              nickname = xlxsData[u][2];
+              Facility = xlxsData[u][3];
+              EmployeeNo = xlxsData[u][4];
+              phone = xlxsData[u][5];
+              Consent = xlxsData[u][6];
 
               var askhr_fields = ({
                 "name": name,
