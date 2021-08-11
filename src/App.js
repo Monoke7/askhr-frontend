@@ -144,7 +144,6 @@ function App() {
           if (totalItem === cntRun) {
             if(cntFailed !== 0){
               setData("The total number of records processed is " + cntRun + ", successfully created is " + cntSuccess + ", not created because of record format is " + cntFailed);
-            
             }else{
               setData("The number of records successfully created is " + cntSuccess);
             }
