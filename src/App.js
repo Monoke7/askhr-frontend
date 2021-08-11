@@ -130,11 +130,7 @@ function App() {
         .then(result => {
           result = JSON.parse(result);
           cntRun++;
-
-          console.log('====================================');
-          console.log(result);
-          console.log('====================================');
-
+          
           if(result.error){
             cntFailed++;
           }else{
