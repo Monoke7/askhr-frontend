@@ -11,6 +11,8 @@ function App() {
   const [type, settype] = useState(null);
   const [loader, setloader] = useState(null);
   let cntRun = 0;
+  let cntFailed = 0;
+  let cntSuccess = 0;
 
   function getxlxs(e) {
     file = e.target.files; 
@@ -44,12 +46,12 @@ function App() {
             var totalItem = 0;
             for (var u = 1; u < xlxsData.length; u++) {
 
-              name = (xlxsData[u][0] + " " + xlxsData[u][1]);
-              nickname = xlxsData[u][2];
-              Facility = xlxsData[u][3];
-              EmployeeNo = xlxsData[u][4];
-              phone = xlxsData[u][5];
-              Consent = xlxsData[u][6];
+              name = (xlxsData[u][0] || xlxsData[u][1])?(xlxsData[u][0] + " " + xlxsData[u][1]): 1;
+              nickname = xlxsData[u][2]? xlxsData[u][2] + "" : 2;
+              Facility = xlxsData[u][3]? xlxsData[u][3] + "":3;
+              EmployeeNo = xlxsData[u][4]?xlxsData[u][4] + "":4;
+              phone = xlxsData[u][5]?xlxsData[u][5] + "":5;
+              Consent = xlxsData[u][6]?xlxsData[u][6] + "":6;
 
               var askhr_fields = ({
                 "name": name,
@@ -126,11 +128,26 @@ function App() {
       fetch(url, requestOptions)
         .then(response => response.text())
         .then(result => {
-
+          result = JSON.parse(result);
           cntRun++;
 
+          console.log('====================================');
+          console.log(result);
+          console.log('====================================');
+
+          if(result.error){
+            cntFailed++;
+          }else{
+            cntSuccess++;
+          }
+
           if (totalItem === cntRun) {
-            setData("The number of records created successfully is " + cntRun);
+            if(cntFailed !== 0){
+              setData("The total number of records processed is " + cntRun + ", successfully created is " + cntSuccess + ", not created because of record format is " + cntFailed);
+            
+            }else{
+              setData("The number of records successfully created is " + cntSuccess);
+            }
             settype("success");
             setloader("");
           }
