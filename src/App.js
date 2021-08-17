@@ -63,27 +63,27 @@ function App() {
               });
               if (askhr_fields.empNum) {
                 arLimite.push(askhr_fields);
-                totalItem++;
+                
               }
 
-              if (arLimite.length === 50) {
+              if (arLimite.length === 200) {
                 arAskhrData.push(arLimite);
+                totalItem++;
                 arLimite = [];
               }
 
             }
             console.log('====================================');
             if (arAskhrData.length > 0) {
+
+              if (arLimite.length > 0) {
+                arAskhrData.push(arLimite);
+                totalItem++;
+              }
+
+
               arAskhrData.forEach((val) => {
-                val.forEach((value) => {
-                 saveData(value, totalItem);
-                });
-              });
-            }
-            console.log('====================================');
-            if (arLimite.length > 0) {
-              arLimite.forEach((value) => {
-                saveData(value, totalItem);
+                 saveData(val, totalItem);
               });
             }
             console.log('====================================');
@@ -113,7 +113,7 @@ function App() {
       
       myHeaders.append("Content-Type", "application/json");
        myHeaders.append("Access-Control-Allow-Origin", "*");
-      var url = "https://ra0353ccb7.execute-api.us-east-1.amazonaws.com/dev/askhr/add/employee";
+      var url = "https://ra0353ccb7.execute-api.us-east-1.amazonaws.com/dev/askhr/add_many/employee";
         
 
       var raw = JSON.stringify(data);
@@ -129,17 +129,21 @@ function App() {
         .then(response => response.text())
         .then(result => {
           result = JSON.parse(result);
-          cntRun++;
           
-          if(result.error){
-            cntFailed++;
-          }else{
-            cntSuccess++;
+
+          cntRun++;
+
+          if(result){
+            var {count_added, error_details} = result;
+
+            cntFailed += error_details.length;
+            cntSuccess += count_added;
           }
 
           if (totalItem === cntRun) {
             if(cntFailed !== 0){
-              setData("The total number of records processed is " + cntRun + ", successfully created is " + cntSuccess + ", not created because of record format is " + cntFailed);
+              let totalProcess = (cntSuccess + cntFailed);
+              setData("The total number of records processed is " + totalProcess + ", successfully created is " + cntSuccess + ", not created because of record format is " + cntFailed);
             }else{
               setData("The number of records successfully created is " + cntSuccess);
             }
@@ -286,7 +290,7 @@ function App() {
           style={{ marginTop: "200px", fontSize: 18 }}
         >
           <p>
-            Copyright © All rights reserved | Application Develop by{" "}
+            Copyright © All rights reserved | Application Developed by{" "}
             <a
               href="https://illation.co.za"
               rel="noreferrer"
